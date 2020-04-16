@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<ul>
-	{% for c in categories %}
-		<h1> {{ c.name }} </h1>
-		{% for t in c.task_set.all %}
-			<li> {{ t.title | capfirst }} </li>
+<div class="sidebar">
+	<ul>
+		{% for c in categories %}
+			<li class="side"><a href="#"> {{ c.name }} </a></li>
 		{% endfor %}
-		<br>
-	{% endfor %}
-</ul>
+	</ul>
+</div>
+<div class="content">
+	<ul>
+		{% for c in categories %}
+			<h1> {{ c.name }} </h1>
+			{% for t in c.task_set.all %}
+				<li> {{ t.title | capfirst }} </li>
+			{% endfor %}
+			<br>
+		{% endfor %}
+	</ul>
+</div>
 {% endblock content %}

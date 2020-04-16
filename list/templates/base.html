@@ -2,18 +2,16 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title> Welcome to ToDoList </title>
+		<title> Welcome to TodoList </title>
 		<link rel="stylesheet" href="{% static 'main.css' %}" type="text/css">
 	</head>
 	<body>
 		<header>
-
-				<p> Bla Bla </p>
-
+			<h1 id="maintitle">TodoList</h1>
 		</header>
-		<main>
+		<div class="maincontent">
 			{% block content %}
 			{% endblock content %}
-		</main>
+		</div>
 	</body>
 </html>
