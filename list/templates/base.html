@@ -1,8 +1,19 @@
+{% load static %}
 <html>
 	<head>
+		<meta charset="UTF-8">
+		<title> Welcome to ToDoList </title>
+		<link rel="stylesheet" href="{% static 'main.css' %}" type="text/css">
 	</head>
 	<body>
-		{% block content %}
-		{% endblock content %}
+		<header>
+
+				<p> Bla Bla </p>
+
+		</header>
+		<main>
+			{% block content %}
+			{% endblock content %}
+		</main>
 	</body>
 </html>
