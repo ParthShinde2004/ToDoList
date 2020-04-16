@@ -1,11 +1,13 @@
-<html>
-	<head>
-	</head>
-	<body>
-		<ul>
-			{% for t in tasks %}
-			<li>{{ t.title }}</li>
-			{% endfor %}
-		</ul>
-	</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<ul>
+	{% for c in categories %}
+		<h1> {{ c.name }} </h1>
+		{% for t in c.task_set.all %}
+			<li> {{ t.title | capfirst }} </li>
+		{% endfor %}
+		<br>
+	{% endfor %}
+</ul>
+{% endblock content %}

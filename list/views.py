@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Task
+from .models import Task, Category
 
 # Create your views here.
 def home(request):
-	tasks = Task.objects.all()
-	return render(request, "home.html", {"tasks":tasks})
+	categories = Category.objects.all()
+	return render(request, "home.html", {"categories":categories})
