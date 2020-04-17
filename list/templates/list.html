@@ -9,14 +9,12 @@
 	</ul>
 </div>
 <div class="content">
+	<h1> {{ category.name }} </h1>
 	<ul>
-		{% for c in categories %}
-			<h1> {{ c.name }} </h1>
-			{% for t in c.task_set.all %}
+			{% for t in category.task_set.all %}
 				<li> {{ t.title | capfirst }} </li>
 			{% endfor %}
 			<br>
-		{% endfor %}
 	</ul>
 </div>
 {% endblock content %}

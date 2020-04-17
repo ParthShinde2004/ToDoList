@@ -3,12 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title> Welcome to TodoList </title>
-		<link rel="stylesheet" href="{% static 'main.css' %}" type="text/css">
+		<link rel="stylesheet" type="text/css" href="{% static 'main.css' %}" >
 	</head>
 	<body>
-		<header>
+		<div class="header">
 			<h1 id="maintitle">TodoList</h1>
-		</header>
+		</div>
 		<div class="maincontent">
 			{% block content %}
 			{% endblock content %}
