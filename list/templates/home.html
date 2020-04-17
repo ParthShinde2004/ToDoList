@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
 	<ul>
 		{% for c in categories %}
-			<li class="side"><a href="{% url 'list' c.name %}"> {{ c.name }} </a></li>
+			<li class="side" id="{{'tab'|add:c.name}}"><a href="#" onclick="openCategory('{{ c.name }}')"> {{ c.name }} </a></li>
 		{% endfor %}
 	</ul>
 </div>
-<div class="content">
+<div class="content" id="categoryContent">
 	<ul>
 		{% for c in categories %}
+			<div id="{{'category'|add:c.name}}">  
 			<h1> {{ c.name }} </h1>
 			{% for t in c.task_set.all %}
 				<li> {{ t.title | capfirst }} </li>
 			{% endfor %}
 			<br>
+			</div>
 		{% endfor %}
 	</ul>
 </div>
