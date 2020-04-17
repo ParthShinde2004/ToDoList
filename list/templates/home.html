@@ -3,6 +3,7 @@
 {% block content %}
 <div class="sidebar" id="sidebar">
 	<ul>
+		<li class="side" id="tabAll"><a onclick="openCategory('All')"> All </a></li>
 		{% for c in categories %}
 			<li class="side" id="{{'tab'|add:c.name}}"><a href="#" onclick="openCategory('{{ c.name }}')"> {{ c.name }} </a></li>
 		{% endfor %}

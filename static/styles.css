@@ -1,5 +1,6 @@
 body {
 	margin: 0 auto;
+	font-family: Roboto, sans-serif;
 }
 
 main {
@@ -7,21 +8,35 @@ main {
 }
 
 .header {
-	z-index: 10;
 	background-color: white;
-	box-shadow: 0 2px 20px #CCCCCC;
+	box-shadow: 0 1px 10px #CCCCCC;
 	height: 70px;
 	margin: 0;
+	position: relative;
+	z-index:10;
 }
 
 ul {
 	list-style-type: none;
+	padding-left: 0;
 }
 
+
 li.side {
-	margin: 20px 0;
-	font-size: 1.4em;
+	/*margin: 20px 0;*/
+	font-size: 1em;
+	padding: 20px 30px;
 }
+
+li.active {
+	background-color: #5ca5c4;
+}
+
+.active > a {
+	color:#ffffff;
+}
+
+
 
 a {
 	color: black;
@@ -29,8 +44,9 @@ a {
 }
 
 a:hover {
-	color: blue;
+	color: #9dcee3;
 }
+
 
 #maintitle {
 	padding-top:20px;
@@ -47,17 +63,19 @@ a:hover {
 	height: 100%;
 	position: fixed;
 	overflow: auto;
-	top: 70px;
-	z-index: 1;
+	/*top: 70px;*/
+	z-index: 10;
 	/*border-right: 1px solid #eaeaea;*/
 }
 
 .content {
 	margin-left: 300px;
 	position: fixed;
-	z-index: -2;
+	
 }
 
 .maincontent {
-	position: auto;
+	position: fixed;
+	/*overflow: auto;*/
+	/*z-index: -1;*/
 }
