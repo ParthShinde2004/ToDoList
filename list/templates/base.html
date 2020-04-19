@@ -14,8 +14,21 @@
 			{% block content %}
 			{% endblock content %}
 		</div>
+		<div class="modal" id="newCategory">
+			<div class="modalContent" id="newCategoryWindow">
+				<h2 id="addList">Add List</h2>
+				<span class="close">&times;</span>
+				<form id="newList">
+					<input type="text" name="newList" placeholder="New List...">
+					<br>
+					<input type="submit" value="Add List">
+					<input type="reset" value="Reset">
+				</form>
+			</div>
+		</div>
 		<script>
-			path = "{% url 'newtask' %}"
+			taskPath = "{% url 'newtask' %}"
+			listPath = "{% url 'newlist' %}"
 			ctoken = "{{ csrf_token }}"
 		</script>
 		<script type="text/javascript" src="{% static 'main.js' %}"></script>

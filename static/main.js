@@ -31,37 +31,87 @@ function openCategory(category) {
 	}
 }
 
-// $(function() {
-    $('form#newTask').on('submit', function(e) {
-    	// console.log("Hello")
-    	var formInput = $("#newTask").serializeArray();
-    	console.log(formInput);
-    	var postData = {};
-    	for (var i = 0; i < formInput.length; i++) {
-    		postData[formInput[i].name] = formInput[i].value;
-    	}
-    	postData['csrfmiddlewaretoken'] = ctoken;
-    	console.log(postData);
-        $.ajax({
-	      method: "POST",
-	      url: path,
-	      data: postData,
-	      success: function(data) {
-	        console.log(data) // check out how data is structured
-	        var newTask = document.createElement("li")
-	        newTask.innerHTML =  data['title']
-	        var divId = "category" + data.category
-	        document.getElementById(divId).appendChild(newTask)
+function addCategory() {
+	var popup = document.getElementById("newCategory");
+	popup.style.display = "block";
+}
 
-	        // Update the coin amount
-	        // $('.status').contents()[0].textContent = 'Balance&nbsp'+data.coins
-	      }, 
-	      error: function(request) {
-	      	console.log(request.responseText)
-	      }
-	    })
-        e.preventDefault();
-    });
+// $(function() {
+$('form#newTask').on('submit', function(e) {
+	// console.log("Hello")
+	var formInput = $("#newTask").serializeArray();
+	console.log(formInput);
+	var postData = {};
+	for (var i = 0; i < formInput.length; i++) {
+		postData[formInput[i].name] = formInput[i].value;
+	}
+	postData['csrfmiddlewaretoken'] = ctoken;
+	console.log(postData);
+    $.ajax({
+      method: "POST",
+      url: taskPath,
+      data: postData,
+      success: function(data) {
+        // console.log(data) // check out how data is struct
+        var newTask = document.createElement("li")
+        newTask.innerHTML =  data['title']
+        var divId = "category" + data.category
+        var parentDiv =  document.getElementById(divId);
+        // parentDiv.appendChild(newTask)
+        var index = parentDiv.children.length-1;
+        parentDiv.insertBefore(newTask, parentDiv.children[index])
+      }, 
+      error: function(request) {
+      	console.log(request.responseText)
+      }
+    })
+    e.preventDefault();
+});
+
+
+$('form#newList').on('submit', function(e) {
+	// console.log("Hello")
+	var formInput = $("#newList").serializeArray()[0];
+	console.log(formInput);
+	var postData = {};
+	// postData[formInput[]]
+	postData[formInput.name] = formInput.value
+	postData['csrfmiddlewaretoken'] = ctoken;
+    $.ajax({
+      method: "POST",
+      url: listPath,
+      data: postData,
+      success: function(data) {
+      	// close popup window
+      	var popup = document.getElementById("newCategory");
+		popup.style.display = "none";
+		// add new list
+		var newCategory = document.createElement("li");
+		newCategory.setAttribute("class", "side");
+		var newId = "tab" + data['name'];
+		newCategory.setAttribute("id", newId);
+		newCategory.innerHTML = "<a onclick=\"openCategory(" + data['name'] + ")\">" + data['name'] + "</a>";
+		var parentDiv =  document.getElementById("listTabs");
+        var index = parentDiv.children.length-1;
+        parentDiv.insertBefore(newCategory, parentDiv.children[index])
+
+      	// console.log(newCategory.innerHTML);
+
+      }, 
+      error: function(request) {
+      	console.log(request.responseText)
+      }
+    })
+    e.preventDefault();
+});
+
+$('.close').on('click',function(e) {
+	var popup = document.getElementById("newCategory");
+	popup.style.display = "none";
+});
+
+
+
 // });
 
 // function submitTask() {

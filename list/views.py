@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 
 from .models import Task, Category
 
@@ -27,3 +26,13 @@ def new_task(request):
 	new.save()
 	return JsonResponse({"title": new_title, "category": c})
 	# return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+def new_list(request):
+	post = request.POST
+	newName = post.get("newList").strip()
+	if newName == "":
+		raise Http404
+	new = Category(name=newName)
+	new.save()
+	return JsonResponse({"name": new.name})

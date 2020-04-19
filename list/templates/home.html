@@ -3,11 +3,12 @@
 {% block content %}
 <div class="sidebar" id="sidebar">
 	<!-- <h2 id="labels"> Labels </h2> -->
-	<ul>
+	<ul id="listTabs">
 		<li class="side active" id="tabAll"><a onclick="openCategory('All')"> All </a></li>
 		{% for c in categories %}
-			<li class="side" id="{{'tab'|add:c.name}}"><a href="#" onclick="openCategory('{{ c.name }}')"> {{ c.name }} </a></li>
+			<li class="side" id="{{'tab'|add:c.name}}"><a onclick="openCategory('{{ c.name }}')"> {{ c.name }} </a></li>
 		{% endfor %}
+		<li class="side" id="tabNewCategory"><a onclick="addCategory()"> Add List </a></li>
 	</ul>
 </div>
 <div class="content">
@@ -25,12 +26,12 @@
 	<div class="taskList" id="categoryContent">
 		<ul>
 			{% for c in categories %}
-				<br>
 				<div id="{{'category'|add:c.name}}">  
 				<h1> {{ c.name }} </h1>
 				{% for t in c.task_set.all %}
 					<li> {{ t.title }} </li>
 				{% endfor %}
+				<br>
 				</div>
 			{% endfor %}
 		</ul>
