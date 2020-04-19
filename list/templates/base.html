@@ -2,12 +2,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title> Welcome to TodoList </title>
+		<title> TodoList </title>
 		<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" >
+		<link rel="icon" href="{% static 'listlogo.png' %}">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class="header">
+			<img src="{% static 'listlogo.png' %}" id="logo">
 			<h1 id="maintitle">TodoList</h1>
 		</div>
 	    <div class="maincontent">
