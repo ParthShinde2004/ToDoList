@@ -30,3 +30,48 @@ function openCategory(category) {
 		}
 	}
 }
+
+// $(function() {
+    $('form#newTask').on('submit', function(e) {
+    	// console.log("Hello")
+    	var formInput = $("#newTask").serializeArray();
+    	console.log(formInput);
+    	var postData = {};
+    	for (var i = 0; i < formInput.length; i++) {
+    		postData[formInput[i].name] = formInput[i].value;
+    	}
+    	postData['csrfmiddlewaretoken'] = ctoken;
+    	console.log(postData);
+        $.ajax({
+	      method: "POST",
+	      url: path,
+	      data: postData,
+	      success: function(data) {
+	        console.log(data) // check out how data is structured
+	        var newTask = document.createElement("li")
+	        newTask.innerHTML =  data['title']
+	        var divId = "category" + data.category
+	        document.getElementById(divId).appendChild(newTask)
+
+	        // Update the coin amount
+	        // $('.status').contents()[0].textContent = 'Balance&nbsp'+data.coins
+	      }, 
+	      error: function(request) {
+	      	console.log(request.responseText)
+	      }
+	    })
+        e.preventDefault();
+    });
+// });
+
+// function submitTask() {
+// 	var newTask = $("#newTask").serialize();
+// 	console.log(newTask)
+// 	var elem = document.createElement("P")
+// 	elem.innerHTML = "adsfa";
+// 	document.getElementById("categoryContent").appendChild(elem);
+
+
+
+
+// }

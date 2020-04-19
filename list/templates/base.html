@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title> Welcome to TodoList </title>
 		<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" >
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class="header">
@@ -13,6 +14,10 @@
 			{% block content %}
 			{% endblock content %}
 		</div>
+		<script>
+			path = "{% url 'newtask' %}"
+			ctoken = "{{ csrf_token }}"
+		</script>
 		<script type="text/javascript" src="{% static 'main.js' %}"></script>
 	</body>
 	

@@ -21,4 +21,5 @@ from list import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name="home"),
+    url(r'^new_task/$', views.new_task, name="newtask")
 ]

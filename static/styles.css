@@ -10,11 +10,16 @@ main {
 .header {
 	background-color: white;
 	box-shadow: 0 1px 10px #CCCCCC;
-	height: 70px;
+	height: 55px;
 	margin: 0;
 	position: relative;
 	z-index:10;
 }
+
+/*#label {
+	font-size: 1em;
+	margin-left: 30px;
+}*/
 
 ul {
 	list-style-type: none;
@@ -29,11 +34,12 @@ li.side {
 }
 
 li.active {
-	background-color: #5ca5c4;
+	background-color: #dadfe8;
 }
 
 .active > a {
-	color:#ffffff;
+	/*color:#ffffff;*/
+	font-weight: bold;
 }
 
 
@@ -41,6 +47,7 @@ li.active {
 a {
 	color: black;
 	text-decoration: none;
+	display: block;
 }
 
 a:hover {
@@ -49,8 +56,8 @@ a:hover {
 
 
 #maintitle {
-	padding-top:20px;
-	padding-left:15px;
+	padding-top: 15px;
+	padding-left:20px;
 	font-family: Roboto, sans-serif;
 	font-size: 1.5em;
 }
@@ -78,4 +85,8 @@ a:hover {
 	position: fixed;
 	/*overflow: auto;*/
 	/*z-index: -1;*/
+}
+
+.taskForm {
+	padding-top: 30px;
 }

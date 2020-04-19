@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 
 from .models import Task, Category
 
@@ -8,3 +9,21 @@ def home(request):
 	categories = Category.objects.all()
 	return render(request, "home.html", {"categories":categories})
 
+
+def new_task(request):
+	post = request.POST
+	print(post)
+	new_title = post.get("newTask")
+	c = post.get("taskCategory")
+	print("--------------------------")
+	print(new_title)
+	print(c)
+	# new_due_date = post.get("newTask")
+	# new_done = 
+	new_priority = 'L'
+	new_category = Category.objects.get(name=c)
+	print(new_category)
+	new = Task(title=new_title, priority=new_priority, category=new_category)
+	new.save()
+	return JsonResponse({"title": new_title, "category": c})
+	# return HttpResponse(json.dumps(response_data), content_type="application/json")
