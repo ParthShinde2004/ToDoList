@@ -15,7 +15,7 @@
 	<div class="taskForm"> 
 		<form id="newTask">
 			<div class="textArea">
-				<input type="text" name="newTask" placeholder="New Task..." id="taskTextInput">
+				<input type="text" name="newTask" placeholder="New Task..." id="taskTextInput" autocomplete="off">
 				<!-- <div class="dropDown"> -->
 					<select name="taskCategory">
 						{% for c in categories %}
@@ -36,7 +36,11 @@
 				<div id="{{'category'|add:c.name}}">  
 				<h1> {{ c.name }} </h1>
 				{% for t in c.task_set.all %}
-					<li> {{ t.title }} </li>
+					<li class="task"> 
+						<input type="checkbox" id="{{c.name|add:t.title}}" name="{{c.name|add:t.title}}">
+						<label for="{{c.name|add:t.title}}"></label>
+						{{ t.title }} 
+					</li>
 				{% endfor %}
 				<br>
 				</div>
