@@ -85,7 +85,8 @@ $('form#newList').on('submit', function(e) {
       	// close popup window
       	var popup = document.getElementById("newCategory");
 		popup.style.display = "none";
-		// add new list
+
+		// add new list on sidebar
 		var newCategory = document.createElement("li");
 		newCategory.setAttribute("class", "side");
 		var newId = "tab" + data['name'];
@@ -94,6 +95,18 @@ $('form#newList').on('submit', function(e) {
 		var parentDiv =  document.getElementById("listTabs");
         var index = parentDiv.children.length-1;
         parentDiv.insertBefore(newCategory, parentDiv.children[index])
+
+        //add list content
+        // var divId = "category" + data.category
+        var newList = document.createElement("div");
+        newList.setAttribute("id", "category" + data['name']);
+        newList.innerHTML =  "<h1>" + data['name'] + "</h1><br>";
+        var parentDiv =  document.getElementById("listNames");
+        parentDiv.appendChild(newList);
+
+        openCategory(data['name']);
+
+
 
       	// console.log(newCategory.innerHTML);
 

@@ -24,7 +24,7 @@
 		</form>
 	</div>
 	<div class="taskList" id="categoryContent">
-		<ul>
+		<ul id="listNames">
 			{% for c in categories %}
 				<div id="{{'category'|add:c.name}}">  
 				<h1> {{ c.name }} </h1>
