@@ -14,13 +14,20 @@
 <div class="content">
 	<div class="taskForm"> 
 		<form id="newTask">
-			<input type="text" name="newTask" placeholder="New Task...">
-			<select name="taskCategory">
-				{% for c in categories %}
-					<option value="{{ c.name }}">{{ c.name }}</option>
-				{% endfor %}
-			</select>
-			<input type="submit" value="Add Task">
+			<div class="textArea">
+				<input type="text" name="newTask" placeholder="New Task..." id="taskTextInput">
+				<!-- <div class="dropDown"> -->
+					<select name="taskCategory">
+						{% for c in categories %}
+							<option value="{{ c.name }}">{{ c.name }}</option>
+						{% endfor %}
+					</select>
+					<!-- <p> hellow</p> -->
+				<!-- </div> -->
+			</div>
+			<div class="submitButton">
+				<input type="submit" value="Add Task">
+			</div>
 		</form>
 	</div>
 	<div class="taskList" id="categoryContent">

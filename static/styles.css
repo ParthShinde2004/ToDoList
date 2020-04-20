@@ -53,8 +53,8 @@ li.side {
 }
 
 li.active {
-	/*background-color: #dadfe8;*/
-	background-color: #ffffff;
+	background-color: rgba(109, 179, 201, 0.2);
+	/*background-color: #ffffff;*/
 }
 
 .active > a {
@@ -65,13 +65,13 @@ li.active {
 
 
 a {
-	color: black;
+	color: #333333;
 	text-decoration: none;
 	display: block;
 }
 
 a:hover {
-	color: #9dcee3;
+	color: #3298cf;
 }
 
 
@@ -97,6 +97,8 @@ h2#addList {
 	margin-left: 300px;
 	position: fixed;
 	overflow: auto;
+	color: #222222;
+
 	
 }
 
@@ -104,10 +106,11 @@ h2#addList {
 	position: fixed;
 	/*z-index: -1;*/
 	overflow: auto;
+	/*width: 100%;*/
 }
 
 .taskForm {
-	padding-top: 30px;
+	padding-top: 15px;
 }
 
 .modal {
@@ -132,10 +135,29 @@ h2#addList {
 	box-shadow: 1px 1px 10px #BBBBBB;
 	border-radius: 5px;
 }
+input {
+	border-radius: 5px;
+}
 
 input[type=text] {
-	margin-top: 10px;
-	margin-bottom: 10px
+	margin: 10px 0px;
+	border-radius: 5px 0px 0px 5px;
+	border: 1px solid rgba(50, 152, 207, 0.0) ;
+	background-color: rgba(230,230,230,0.3);
+	padding:15px;
+	font-size: 0.9em;
+	float: left;
+}
+
+input[type=submit] {
+	border: 1px solid rgba(50, 152, 207, 0.0) ;
+	color: white;
+	background-color: #6bb2c9;
+	border-radius: 3px;
+	font-size: 0.8em;
+	padding:8px 16px;
+	font-weight: bold;
+	/*display: block;*/
 }
 
 input[type=reset] {
@@ -143,10 +165,54 @@ input[type=reset] {
 	color: white;
 }
 
+input:focus {
+	outline: none;
+	border: 1px solid rgba(50, 152, 207, 0.4);
+}
+
 .close {
 	display: inline;
 	float: right;
 }
+
+#taskTextInput {
+	width: 600px;
+	height: 45px;
+	/*float: left;*/
+}
+
+.dropDown select {
+	/*display: none;*/
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+.textArea {
+	/*display: inline;*/
+	
+	/*background-color: black;*/
+	/*float: left;*/
+
+}
+
+.dropDown {
+	position:relative;
+	float: left;
+	background-color: rgba(230,230,230,0.3);
+	width:10%;
+	height:45px;
+	margin: 10px 0px;
+	border-radius: 0px 5px 5px 0px;
+	border-left: 1px solid #DDDDDD
+
+}
+
+.submitButton {
+	/*display: block;*/
+}
+
 
 
 
