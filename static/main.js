@@ -36,6 +36,33 @@ function addCategory() {
 	popup.style.display = "block";
 }
 
+function showCategories() {
+	var dropDown = document.getElementById("categoryDropDown");
+	var dropDownBox = document.getElementById("dropDownBox");
+
+	if (dropDownBox.style.display === "block") {
+		dropDownBox.style.display = "none";
+		dropDown.style.border = "none";
+	} else {
+		dropDownBox.style.display = "block";
+		dropDown.style.border = "1px solid rgba(50, 152, 207, 0.4)";
+	}
+}
+
+function selectCategory(category) {
+	var selected = document.getElementById("selectedCategory");
+	selected.innerHTML = category;
+	var dropDown = document.getElementById("categoryDropDown");
+	var dropDownBox = document.getElementById("dropDownBox");
+	dropDownBox.style.display = "none";
+	dropDown.style.border = "none";
+	$('#taskCategory').val(category);
+}
+
+// window.onclick = function(event) {
+	// probably use class 
+// }
+
 // $(function() {
 $('form#newTask').on('submit', function(e) {
 	// console.log("Hello")
@@ -52,14 +79,21 @@ $('form#newTask').on('submit', function(e) {
       url: taskPath,
       data: postData,
       success: function(data) {
-        // console.log(data) // check out how data is struct
-        var newTask = document.createElement("li")
-        newTask.innerHTML =  data['title']
+        var newTask = document.createElement("li");
+        var name = data.category + data['title'];
+        newTask.innerHTML =  '<input type="checkbox" id="' + name + '" name="'+ name + '"><label for="' + name + '"></label> ';
+        newTask.innerHTML += data['title'];
+        newTask.className += "task";
         var divId = "category" + data.category
         var parentDiv =  document.getElementById(divId);
-        // parentDiv.appendChild(newTask)
         var index = parentDiv.children.length-1;
         parentDiv.insertBefore(newTask, parentDiv.children[index])
+
+        // clear form input after submitting
+        var form = document.getElementById("newTask");
+        form.reset();
+        var selected = document.getElementById("selectedCategory");
+		selected.innerHTML = "List&nbsp;&nbsp;";
       }, 
       error: function(request) {
       	console.log(request.responseText)
@@ -106,10 +140,6 @@ $('form#newList').on('submit', function(e) {
 
         openCategory(data['name']);
 
-
-
-      	// console.log(newCategory.innerHTML);
-
       }, 
       error: function(request) {
       	console.log(request.responseText)
@@ -122,6 +152,10 @@ $('.close').on('click',function(e) {
 	var popup = document.getElementById("newCategory");
 	popup.style.display = "none";
 });
+
+// #('.drop')
+
+
 
 
 

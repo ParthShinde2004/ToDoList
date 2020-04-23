@@ -19,12 +19,13 @@
 		<div class="modal" id="newCategory">
 			<div class="modalContent" id="newCategoryWindow">
 				<h2 id="addList">Add List</h2>
-				<span class="close">&times;</span>
+				<span class="close" id="closeX">&times;</span>
 				<form id="newList">
-					<input type="text" name="newList" placeholder="New List...">
-					<br>
-					<input type="submit" value="Add List">
-					<input type="reset" value="Reset">
+					<input type="text" name="newList" placeholder="New List..." id="newListText" autocomplete="off">
+					<div class="buttonArea">
+						<input type="submit" value="Add List">
+						<input type="button" value="Cancel" class="close cancel">
+					</div>
 				</form>
 			</div>
 		</div>
