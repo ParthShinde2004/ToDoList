@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="sidebar" id="sidebar">
@@ -29,7 +30,7 @@
 					</select>
 					<!-- <p> hellow</p> -->
 				</div>
-				<div id="dropDownBox"> 	
+				<div class="dropDownBox" id="newDropDownBox"> 	
 					<ul class="dropDownList">
 						{% for c in categories %}
 							<li> <a class="dropDownItem" onclick="selectCategory('{{ c.name }}')">{{ c.name }} </a></li>
@@ -47,13 +48,25 @@
 			{% for c in categories %}
 				<div id="{{'category'|add:c.name}}">  
 				<h1> {{ c.name }} </h1>
+				
 				{% for t in c.task_set.all %}
-					<li class="task"> 
-						<input type="checkbox" id="{{c.name|add:t.title}}" name="{{c.name|add:t.title}}">
-						<label for="{{c.name|add:t.title}}"></label>
-						{{ t.title }} 
+					{% with t.id|stringformat:"s" as taskid %}
+					<li class="task" id="{{'taskDiv'|add:taskid}}">
+						<a class="taskLink"> 
+							<input type="checkbox" id="{{c.name|add:t.title}}" name="{{c.name|add:t.title}}">
+							<label for="{{c.name|add:t.title}}"></label>
+							{{ t.title }}
+							<img src="{% static 'ellipsis.svg' %}" class="ellipsis" id="{{'task'|add:taskid}}">
+							<div class="dropDownBox taskDropDown" id="{{'ddtask'|add:taskid}}">
+								<ul class="dropDownList">
+									<li> <a class="dropDownItem" onclick="">Delete</a></li>
+								</ul>
+							</div>
+						</a>
 					</li>
+					{% endwith %}
 				{% endfor %}
+				
 				<br>
 				</div>
 			{% endfor %}

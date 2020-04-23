@@ -258,7 +258,7 @@ select {
 
 
 .dropDown {
-	/*position:relative;*/
+	position:relative;
 	float: left;
 	background-color: rgba(230,230,230,0.3);
 	width:100px;
@@ -294,7 +294,7 @@ select {
 
 }
 
-#dropDownBox {
+.dropDownBox {
 	position: absolute;
 	/*width: 100px;*/
 	background-color: white;
@@ -304,6 +304,11 @@ select {
 	display: none;
 	border-radius: 5px;
 	overflow: auto;
+}
+
+.taskDropDown {
+	margin-left: 478px;
+	margin-top: 12px;
 }
 
 .dropDownList {
@@ -325,6 +330,30 @@ select {
 	padding: 10px 0px;
 }
 
+.ellipsis {
+	margin-top: 5px;
+	height: 13px;
+	width: 13px;
+	filter: invert(43%) sepia(1%) saturate(1802%) hue-rotate(169deg) brightness(104%) contrast(71%);;
+	float: right;
+	display: none;
+	padding: 3px;
+	border-radius: 5px;
+	
+}
+
+.taskLink:hover {
+	color: inherit;
+}
+
+.taskLink:hover > .ellipsis {
+	display: block;
+}
+
+.ellipsis.active {
+	display: block;
+	background-color: rgba(200, 200, 200, 0.2);
+}
 
 /*.roundCheckbox {
 	width: 1.5em;

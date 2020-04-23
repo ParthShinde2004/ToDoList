@@ -36,3 +36,17 @@ def new_list(request):
 	new = Category(name=newName)
 	new.save()
 	return JsonResponse({"name": new.name})
+
+
+def delete_task(request, id):
+	try:
+		d = Task.objects.get(pk=id)
+		d.delete()
+	except Task.DoesNotExist:
+		raise Http404
+	return JsonResponse({"deleted": True})
+	# taskName = post.get()
+
+# def task_list(request):
+# 	categories = Category.objects.all()
+# 	return render(request, "tasklist.html", {"categories":categories})

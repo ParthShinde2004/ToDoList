@@ -38,7 +38,7 @@ function addCategory() {
 
 function showCategories() {
 	var dropDown = document.getElementById("categoryDropDown");
-	var dropDownBox = document.getElementById("dropDownBox");
+	var dropDownBox = document.getElementById("newDropDownBox");
 
 	if (dropDownBox.style.display === "block") {
 		dropDownBox.style.display = "none";
@@ -53,7 +53,7 @@ function selectCategory(category) {
 	var selected = document.getElementById("selectedCategory");
 	selected.innerHTML = category;
 	var dropDown = document.getElementById("categoryDropDown");
-	var dropDownBox = document.getElementById("dropDownBox");
+	var dropDownBox = document.getElementById("newDropDownBox");
 	dropDownBox.style.display = "none";
 	dropDown.style.border = "none";
 	$('#taskCategory').val(category);
@@ -79,6 +79,8 @@ $('form#newTask').on('submit', function(e) {
       url: taskPath,
       data: postData,
       success: function(data) {
+      	// reload task lists
+      	// $('#listNames').load("/tasklist");
         var newTask = document.createElement("li");
         var name = data.category + data['title'];
         newTask.innerHTML =  '<input type="checkbox" id="' + name + '" name="'+ name + '"><label for="' + name + '"></label> ';
@@ -142,15 +144,50 @@ $('form#newList').on('submit', function(e) {
 
       }, 
       error: function(request) {
-      	console.log(request.responseText)
+      	console.log(request.responseText);
       }
-    })
+    });
     e.preventDefault();
 });
 
 $('.close').on('click',function(e) {
 	var popup = document.getElementById("newCategory");
 	popup.style.display = "none";
+});
+
+$('.ellipsis').on('click', function(e) {
+	console.log("here")
+	var dropDown = document.getElementById('dd'+e.target.id);
+	if (dropDown.style.display === "block") {
+		dropDown.style.display = "none";
+		e.target.classList.remove("active");
+	} else {
+		dropDown.style.display = "block";
+		e.target.classList.add("active");
+	}
+});
+
+$(".dropDownItem").on("click", function(e) {
+	var deleteId = e.target.parentElement.parentElement.parentElement.id.substring(6);
+	// deleteData['csrfmiddlewaretoken'] = ctoken;
+	$.ajax({
+		method: "DELETE",
+		url: "delete_task/" + deleteId,
+		// data: deleteData,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("X-CSRFToken", ctoken);
+		},
+		success: function(data) {
+			console.log(data["deleted"]);
+			var elem = document.getElementById("taskDiv" + deleteId);
+			elem.parentNode.removeChild(elem);
+			// $('#listNames').load("/tasklist");
+		},
+		error: function(request) {
+			console.log(request.responseText);
+		},
+	});
+	e.preventDefault();
 });
 
 // #('.drop')
