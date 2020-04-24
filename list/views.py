@@ -24,7 +24,7 @@ def new_task(request):
 	print(new_category)
 	new = Task(title=new_title, priority=new_priority, category=new_category)
 	new.save()
-	return JsonResponse({"title": new_title, "category": c})
+	return JsonResponse({"title": new_title, "category": c, "id": new.pk})
 	# return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 

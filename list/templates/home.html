@@ -47,27 +47,27 @@
 		<ul id="listNames">
 			{% for c in categories %}
 				<div id="{{'category'|add:c.name}}">  
-				<h1> {{ c.name }} </h1>
-				
-				{% for t in c.task_set.all %}
-					{% with t.id|stringformat:"s" as taskid %}
-					<li class="task" id="{{'taskDiv'|add:taskid}}">
-						<a class="taskLink"> 
-							<input type="checkbox" id="{{c.name|add:t.title}}" name="{{c.name|add:t.title}}">
-							<label for="{{c.name|add:t.title}}"></label>
-							{{ t.title }}
-							<img src="{% static 'ellipsis.svg' %}" class="ellipsis" id="{{'task'|add:taskid}}">
+					<h1> {{ c.name }} </h1>
+					
+					{% for t in c.task_set.all %}
+						{% with t.id|stringformat:"s" as taskid %}
+						<li class="task" id="{{'taskDiv'|add:taskid}}">
+							<a class="taskLink"> 
+								<input type="checkbox" id="{{'check'|add:taskid}}" name="{{'check'|add:taskid}}">
+								<label for="{{'check'|add:taskid}}"></label>
+								<span>{{ t.title }}</span>
+								<img src="{% static 'ellipsis.svg' %}" class="ellipsis" id="{{'task'|add:taskid}}">
+							</a>
 							<div class="dropDownBox taskDropDown" id="{{'ddtask'|add:taskid}}">
 								<ul class="dropDownList">
-									<li> <a class="dropDownItem" onclick="">Delete</a></li>
+									<li> <a class="dropDownItem">Delete</a></li>
 								</ul>
 							</div>
-						</a>
-					</li>
-					{% endwith %}
-				{% endfor %}
-				
-				<br>
+						</li>
+						{% endwith %}
+					{% endfor %}
+					
+					<br>
 				</div>
 			{% endfor %}
 		</ul>

@@ -331,7 +331,7 @@ select {
 }
 
 .ellipsis {
-	margin-top: 5px;
+	margin-top: 3px;
 	height: 13px;
 	width: 13px;
 	filter: invert(43%) sepia(1%) saturate(1802%) hue-rotate(169deg) brightness(104%) contrast(71%);;

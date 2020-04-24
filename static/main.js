@@ -82,12 +82,71 @@ $('form#newTask').on('submit', function(e) {
       	// reload task lists
       	// $('#listNames').load("/tasklist");
         var newTask = document.createElement("li");
-        var name = data.category + data['title'];
-        newTask.innerHTML =  '<input type="checkbox" id="' + name + '" name="'+ name + '"><label for="' + name + '"></label> ';
-        newTask.innerHTML += data['title'];
         newTask.className += "task";
+        newTask.id = "taskDiv" + data["id"]
+        var name = "check" + data["id"];
+        var imgId = "task" + data["id"];
+        var boxId = "ddtask" + data["id"];
+
+        // create <a class="taskLink>"
+        var newTaskLink = document.createElement('a');
+        newTaskLink.className += "taskLink"; 
+
+        //create <input type="checkbox">
+        var newCheckbox = document.createElement("input");
+        newCheckbox.type ="checkbox";
+        newCheckbox.id = name;
+        newCheckbox.name = name;
+
+        //create label
+        var newLabel = document.createElement("label");
+        newLabel.htmlFor = name;
+
+        //create title
+        var newTitle = document.createElement("span");
+        newTitle.innerHTML = " " + data["title"]
+
+        //create ellipsis
+        var newEllipsis = document.createElement("img");
+        newEllipsis.src ="/static/ellipsis.svg";
+        newEllipsis.className += "ellipsis";
+        newEllipsis.id = imgId;
+
+        //create dropdownbox
+        var newDropDownBox = document.createElement("div");
+        newDropDownBox.className += "dropDownBox taskDropDown";
+        newDropDownBox.id = boxId;
+
+        //create dropdownlist
+        var newDropDownList = document.createElement("ul");
+        newDropDownList.className += "dropDownList";
+
+        //create new li
+        var newLi = document.createElement("li");
+        newLi.innerHTML += "<a class=\"dropDownItem\">Delete</a>";
+
+
+
+        newDropDownList.appendChild(newLi);
+
+        newDropDownBox.appendChild(newDropDownList);
+
+        newTaskLink.appendChild(newCheckbox);
+        newTaskLink.appendChild(newLabel);
+        newTaskLink.appendChild(newTitle);
+        newTaskLink.appendChild(newEllipsis);
+
+        newTask.appendChild(newTaskLink);
+        newTask.appendChild(newDropDownBox);
+        console.log(newTask)
+
+							//<li><a class="dropDownItem">Delete</a></li>';
+        // console.log(newTask.innerHTML)
+
+		
         var divId = "category" + data.category
         var parentDiv =  document.getElementById(divId);
+        console.log(parentDiv)
         var index = parentDiv.children.length-1;
         parentDiv.insertBefore(newTask, parentDiv.children[index])
 
@@ -155,7 +214,7 @@ $('.close').on('click',function(e) {
 	popup.style.display = "none";
 });
 
-$('.ellipsis').on('click', function(e) {
+$('.taskList').on('click', ".ellipsis", function(e) {
 	console.log("here")
 	var dropDown = document.getElementById('dd'+e.target.id);
 	if (dropDown.style.display === "block") {
@@ -167,7 +226,7 @@ $('.ellipsis').on('click', function(e) {
 	}
 });
 
-$(".dropDownItem").on("click", function(e) {
+$(".taskList").on("click", ".dropDownItem", function(e) {
 	var deleteId = e.target.parentElement.parentElement.parentElement.id.substring(6);
 	// deleteData['csrfmiddlewaretoken'] = ctoken;
 	$.ajax({
