@@ -46,7 +46,7 @@
 	<div class="taskList" id="categoryContent">
 		<ul id="listNames">
 			{% for c in categories %}
-				<div id="{{'category'|add:c.name}}">  
+				<div id="{{'category'|add:c.name}}" class="catDetails">  
 					<h1> {{ c.name }} </h1>
 					
 					{% for t in c.task_set.all %}

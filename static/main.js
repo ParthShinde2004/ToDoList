@@ -1,21 +1,20 @@
 var categoryTabs;
 var categoryContent;
 
-window.onload = function () {
-	// categoryTabs = document.getElementById("sidebar").getElementsByTagName("li");
-	categoryTabs = document.getElementsByClassName("side"); // categoryTabs has one more element than categoryContent
-	categoryContent = document.getElementById("categoryContent").getElementsByTagName("div");
-}
+// window.onload = function () {
+
+// }
 
 function openCategory(category) {
-	// console.log(category)
-	// console.log(categoryTabs.length)
+	categoryTabs = document.getElementsByClassName("side"); // categoryTabs has one more element than categoryContent
+	categoryContent = document.getElementById("categoryContent").getElementsByClassName("catDetails");
 	if (category === "All") { 
 		categoryTabs[0].classList.add("active");
 	} else {
 		categoryTabs[0].classList.remove("active");
 	}
 	for (var i = 0; i < categoryContent.length; i++ ) {
+		// if category chosen is all, remove active from all other tabs and show all content
 		if (category === "All") {
 			categoryTabs[i+1].classList.remove("active");
 			categoryContent[i].style.display = "block";
