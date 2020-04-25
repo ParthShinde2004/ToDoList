@@ -89,11 +89,11 @@ h2#addList {
 	/*margin: -20px auto;*/
 	padding: 0;
 	width: 250px;
-	height: 100%;
+	height: 650px;
 	position: fixed;
 	overflow: auto;
 	/*top: 70px;*/
-	z-index: 10;
+	z-index: 5;
 	/*border-right: 1px solid #eaeaea;*/
 }
 
@@ -240,8 +240,8 @@ select {
 	/*overflow: auto;*/
 	color: #222222;
 	height: 100%;
+	z-index: -100;
 }
-
 
 .textArea {
 	/*display: inline;*/
@@ -255,7 +255,6 @@ select {
 	float: left;
 	display:block;
 }
-
 
 .dropDown {
 	position:relative;
@@ -311,6 +310,7 @@ select {
 	margin-top: 12px;
 }
 
+
 .dropDownList {
 	margin: 3px;
 }
@@ -339,7 +339,10 @@ select {
 	display: none;
 	padding: 3px;
 	border-radius: 5px;
-	
+}
+
+.categoryLink > .ellipsis {
+	margin-top: 0px;
 }
 
 .taskLink:hover {
@@ -350,10 +353,26 @@ select {
 	display: block;
 }
 
+.categoryLink:hover > .ellipsis {
+	display: block;
+}
+
+
 .ellipsis.active {
 	display: block;
 	background-color: rgba(200, 200, 200, 0.2);
 }
+
+
+.listDropDown {
+	margin-left: 83px;
+	margin-top: 5px;
+	/*display: block;*/
+	position: absolute;
+	/*z-index: 1000;*/
+	/*overflow:;*/
+}
+
 
 /*.roundCheckbox {
 	width: 1.5em;

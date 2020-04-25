@@ -47,10 +47,6 @@ function showCategories() {
 	}
 }
 
-function selectCategory(category, id) {
-	
-}
-
 // window.onclick = function(event) {
 	// probably use class 
 // }
@@ -118,7 +114,6 @@ $(document).on('submit', '#newTask', function(e) {
         newLi.innerHTML += "<a class=\"dropDownItem\">Delete</a>";
 
 
-
         newDropDownList.appendChild(newLi);
 
         newDropDownBox.appendChild(newDropDownList);
@@ -132,9 +127,8 @@ $(document).on('submit', '#newTask', function(e) {
         newTask.appendChild(newDropDownBox);
         console.log(newTask)
 
-							//<li><a class="dropDownItem">Delete</a></li>';
+		//<li><a class="dropDownItem">Delete</a></li>';
         // console.log(newTask.innerHTML)
-
 		
         var divId = "category" + data["category"];
         var parentDiv =  document.getElementById(divId);
@@ -253,6 +247,33 @@ $(".taskList").on("click", ".dropDownItem", function(e) {
 	e.preventDefault();
 });
 
+
+$(".side").on("click", ".dropDownItem", function(e) {
+	var deleteId = e.target.parentElement.parentElement.parentElement.id.substring(6);
+	console.log("list delete id is " + deleteId);
+	// deleteData['csrfmiddlewaretoken'] = ctoken;
+	$.ajax({
+		method: "DELETE",
+		url: "delete_list/" + deleteId,
+		// data: deleteData,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("X-CSRFToken", ctoken);
+		},
+		success: function(data) {
+			console.log(data["deleted"]);
+			var elem = document.getElementById("category" + deleteId);
+			elem.parentNode.removeChild(elem);
+			elem = document.getElementById("tab" + deleteId);
+			elem.parentNode.removeChild(elem);
+		},
+		error: function(request) {
+			console.log(request.responseText);
+		},
+	});
+	e.preventDefault();
+});
+
+
 $("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
 	var id = e.target.id.substring(8);
 	var selected = document.getElementById("selectedCategory");
@@ -263,6 +284,19 @@ $("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
 	dropDownBox.style.display = "none";
 	console.log("id is " + id);
 	$('#taskCategory').val(id);
+});
+
+
+$('.side').on('click', ".ellipsis", function(e) {
+	console.log("side ellipsis clicked")
+	var dropDown = document.getElementById('dd'+e.target.id);
+	if (dropDown.style.display === "block") {
+		dropDown.style.display = "none";
+		e.target.classList.remove("active");
+	} else {
+		dropDown.style.display = "block";
+		e.target.classList.add("active");
+	}
 });
 
 // #('.drop')
