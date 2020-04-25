@@ -29,6 +29,7 @@ function openCategory(category) {
 	}
 }
 
+
 function addCategory() {
 	var popup = document.getElementById("newCategory");
 	popup.style.display = "block";
@@ -169,18 +170,41 @@ $(document).on('submit', '#newList', function(e) {
 
 		// add new list on sidebar
 		var newCategory = document.createElement("li");
-		newCategory.setAttribute("class", "side");
-		var newId = "tab" + data['name'];
-		newCategory.setAttribute("id", newId);
-		newCategory.innerHTML = "<a onclick=\"openCategory(" + data['name'] + ")\">" + data['name'] + "</a>";
+		newCategory.className += "side sideTabs"
+		var newId = "tab" + data['id'];
+		newCategory.id = newId;
+		var newAnchor = document.createElement("a");
+		newAnchor.className = "categoryLink";
+		newAnchor.innerHTML = "<span>" + data['name'] + "</span>";
+
+		var newEllipsis = document.createElement("img");
+		newEllipsis.src ="/static/ellipsis.svg";
+        newEllipsis.className = "ellipsis";
+        newEllipsis.id = 'eCat' + data['id'];
+
+        var newUl = document.createElement("ul");
+        newUl.className += "dropDownList";
+        newUl.innerHTML = "<li><a class=\"dropDownItem\">Delete</a></li>"
+
+        var newDropDownBox = document.createElement("div");
+        newDropDownBox.className += "dropDownBox listDropDown";
+        newDropDownBox.id = "ddeCat"+ data['id'];
+
+        newDropDownBox.appendChild(newUl);
+        newAnchor.appendChild(newEllipsis);
+
+        newCategory.appendChild(newAnchor);
+        newCategory.appendChild(newDropDownBox);
+
 		var parentDiv =  document.getElementById("listTabs");
         var index = parentDiv.children.length-1;
         parentDiv.insertBefore(newCategory, parentDiv.children[index])
+        
 
         //add list content
         // var divId = "category" + data.category
         var newList = document.createElement("div");
-        newList.setAttribute("id", "category" + data['id']);
+        newList.id  = "category" + data['id'];
         newList.className += "catDetails";
         newList.innerHTML =  "<h1>" + data['name'] + "</h1><br>";
         var parentDiv =  document.getElementById("listNames");
@@ -197,7 +221,7 @@ $(document).on('submit', '#newList', function(e) {
         newDropDownItem.innerHTML = "<a class=\"dropDownItem\" id=\"newTaskC" + data["id"] + "\">" + data['name'] + "</a>";
         newTaskDropDown.appendChild(newDropDownItem);
 
-        openCategory(data['name']);
+        openCategory(data['id']);
 
       }, 
       error: function(request) {
@@ -248,7 +272,20 @@ $(".taskList").on("click", ".dropDownItem", function(e) {
 });
 
 
-$(".side").on("click", ".dropDownItem", function(e) {
+$('#listTabs').on('click', ".ellipsis", function(e) {
+	console.log("side ellipsis clicked")
+	var dropDown = document.getElementById('dd'+e.target.id);
+	if (dropDown.style.display === "block") {
+		dropDown.style.display = "none";
+		e.target.classList.remove("active");
+	} else {
+		dropDown.style.display = "block";
+		e.target.classList.add("active");
+	}
+});
+
+
+$("#listTabs").on("click", ".dropDownItem", function(e) {
 	var deleteId = e.target.parentElement.parentElement.parentElement.id.substring(6);
 	console.log("list delete id is " + deleteId);
 	// deleteData['csrfmiddlewaretoken'] = ctoken;
@@ -265,6 +302,9 @@ $(".side").on("click", ".dropDownItem", function(e) {
 			elem.parentNode.removeChild(elem);
 			elem = document.getElementById("tab" + deleteId);
 			elem.parentNode.removeChild(elem);
+			$("#taskCategory option[value=" + deleteId + "]").remove();
+			elem = document.getElementById("newTaskC" + deleteId);
+			elem.parentNode.parentNode.removeChild(elem.parentNode);
 		},
 		error: function(request) {
 			console.log(request.responseText);
@@ -287,16 +327,11 @@ $("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
 });
 
 
-$('.side').on('click', ".ellipsis", function(e) {
-	console.log("side ellipsis clicked")
-	var dropDown = document.getElementById('dd'+e.target.id);
-	if (dropDown.style.display === "block") {
-		dropDown.style.display = "none";
-		e.target.classList.remove("active");
-	} else {
-		dropDown.style.display = "block";
-		e.target.classList.add("active");
-	}
+
+$('#listTabs').on('click', 'a', function(e) {
+	console.log("side tabs clicked");
+	var category = e.target.parentElement.id.substring(3);
+	openCategory(category);
 });
 
 // #('.drop')

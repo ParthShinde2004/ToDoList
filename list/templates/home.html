@@ -5,12 +5,12 @@
 <div class="sidebar" id="sidebar">
 	<!-- <h2 id="labels"> Labels </h2> -->
 	<ul id="listTabs">
-		<li class="side active" id="tabAll"><a onclick="openCategory('All')"> All </a></li>
+		<li class="side active sideTabs" id="tabAll"><a> All </a></li>
 		{% for c in categories %}
 			{% with c.id|stringformat:"s" as cid %}
-			<li class="side" id="{{'tab'|add:cid}}">
-				<a class="categoryLink" onclick="openCategory('{{cid}}')"> 
-					<span>{{ c.name }}</span>
+			<li class="side sideTabs" id="{{'tab'|add:cid}}">
+				<a class="categoryLink"> 
+					{{ c.name }}
 					<img src="{% static 'ellipsis.svg' %}" class="ellipsis" id="{{'eCat'|add:cid}}"> 
 				</a>
 				<div class="dropDownBox listDropDown" id="{{'ddeCat'|add:cid}}">
@@ -21,7 +21,7 @@
 			</li>
 			{% endwith %}
 		{% endfor %}
-		<li class="side" id="tabNewCategory"><a onclick="addCategory()"> Add List </a></li>
+		<li class="side" id="tabNewCategory" onclick="addCategory()"><a> Add List </a></li>
 	</ul>
 </div>
 <div class="content">
@@ -40,7 +40,6 @@
 							<option value="{{ c.id }}">{{ c.name }}</option>
 						{% endfor %}
 					</select>
-					<!-- <p> hellow</p> -->
 				</div>
 				<div class="dropDownBox" id="newDropDownBox"> 	
 					<ul class="dropDownList" id="newTaskDropDown">

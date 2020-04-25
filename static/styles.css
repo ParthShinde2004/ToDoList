@@ -231,7 +231,8 @@ label {
 }
 
 select {
-	display: none;
+	margin-top: 100px;
+	display: block;
 }
 
 .content {
@@ -363,9 +364,8 @@ select {
 	background-color: rgba(200, 200, 200, 0.2);
 }
 
-
 .listDropDown {
-	margin-left: 83px;
+	margin-left: 94px;
 	margin-top: 5px;
 	/*display: block;*/
 	position: absolute;
