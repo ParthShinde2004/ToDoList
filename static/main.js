@@ -175,7 +175,7 @@ $(document).on('submit', '#newList', function(e) {
 		newCategory.id = newId;
 		var newAnchor = document.createElement("a");
 		newAnchor.className = "categoryLink";
-		newAnchor.innerHTML = "<span>" + data['name'] + "</span>";
+		newAnchor.innerHTML = data['name'];
 
 		var newEllipsis = document.createElement("img");
 		newEllipsis.src ="/static/ellipsis.svg";
