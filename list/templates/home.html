@@ -7,7 +7,9 @@
 	<ul id="listTabs">
 		<li class="side active" id="tabAll"><a onclick="openCategory('All')"> All </a></li>
 		{% for c in categories %}
-			<li class="side" id="{{'tab'|add:c.name}}"><a onclick="openCategory('{{ c.name }}')"> {{ c.name }} </a></li>
+			{% with c.id|stringformat:"s" as cid %}
+			<li class="side" id="{{'tab'|add:cid}}"><a onclick="openCategory('{{cid}}')"> {{ c.name }} </a></li>
+			{% endwith %}
 		{% endfor %}
 		<li class="side" id="tabNewCategory"><a onclick="addCategory()"> Add List </a></li>
 	</ul>
@@ -25,7 +27,7 @@
 					</a>
 					<select name="taskCategory" id="taskCategory">
 						{% for c in categories %}
-							<option value="{{ c.name }}">{{ c.name }}</option>
+							<option value="{{ c.id }}">{{ c.name }}</option>
 						{% endfor %}
 					</select>
 					<!-- <p> hellow</p> -->
@@ -33,7 +35,7 @@
 				<div class="dropDownBox" id="newDropDownBox"> 	
 					<ul class="dropDownList">
 						{% for c in categories %}
-							<li> <a class="dropDownItem" onclick="selectCategory('{{ c.name }}')">{{ c.name }} </a></li>
+							<li> <a class="dropDownItem" onclick="selectCategory('{{ c.name }}', '{{ c.id }}')">{{ c.name }} </a></li>
 						{% endfor %}
 					</ul>
 				</div>
@@ -46,7 +48,9 @@
 	<div class="taskList" id="categoryContent">
 		<ul id="listNames">
 			{% for c in categories %}
-				<div id="{{'category'|add:c.name}}" class="catDetails">  
+				{% with c.id|stringformat:"s" as cid %}
+				<div id="{{'category'|add:cid}}" class="catDetails">  
+				{% endwith %}
 					<h1> {{ c.name }} </h1>
 					
 					{% for t in c.task_set.all %}

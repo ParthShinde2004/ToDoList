@@ -20,7 +20,7 @@ def new_task(request):
 	# new_due_date = post.get("newTask")
 	# new_done = 
 	new_priority = 'L'
-	new_category = Category.objects.get(name=c)
+	new_category = Category.objects.get(id=c)
 	print(new_category)
 	new = Task(title=new_title, priority=new_priority, category=new_category)
 	new.save()

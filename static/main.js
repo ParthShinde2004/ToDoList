@@ -1,13 +1,12 @@
-var categoryTabs;
-var categoryContent;
+
 
 // window.onload = function () {
 
 // }
 
 function openCategory(category) {
-	categoryTabs = document.getElementsByClassName("side"); // categoryTabs has one more element than categoryContent
-	categoryContent = document.getElementById("categoryContent").getElementsByClassName("catDetails");
+	var categoryTabs = document.getElementsByClassName("side"); // categoryTabs has one more element than categoryContent
+	var categoryContent = document.getElementById("categoryContent").getElementsByClassName("catDetails");
 	if (category === "All") { 
 		categoryTabs[0].classList.add("active");
 	} else {
@@ -48,14 +47,14 @@ function showCategories() {
 	}
 }
 
-function selectCategory(category) {
+function selectCategory(category, id) {
 	var selected = document.getElementById("selectedCategory");
 	selected.innerHTML = category;
 	var dropDown = document.getElementById("categoryDropDown");
 	var dropDownBox = document.getElementById("newDropDownBox");
 	dropDownBox.style.display = "none";
 	dropDown.style.border = "none";
-	$('#taskCategory').val(category);
+	$('#taskCategory').val(id);
 }
 
 // window.onclick = function(event) {
@@ -194,6 +193,7 @@ $('form#newList').on('submit', function(e) {
         // var divId = "category" + data.category
         var newList = document.createElement("div");
         newList.setAttribute("id", "category" + data['name']);
+        newList.className += "catDetails";
         newList.innerHTML =  "<h1>" + data['name'] + "</h1><br>";
         var parentDiv =  document.getElementById("listNames");
         parentDiv.appendChild(newList);
