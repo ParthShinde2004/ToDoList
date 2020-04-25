@@ -48,13 +48,7 @@ function showCategories() {
 }
 
 function selectCategory(category, id) {
-	var selected = document.getElementById("selectedCategory");
-	selected.innerHTML = category;
-	var dropDown = document.getElementById("categoryDropDown");
-	var dropDownBox = document.getElementById("newDropDownBox");
-	dropDownBox.style.display = "none";
-	dropDown.style.border = "none";
-	$('#taskCategory').val(id);
+	
 }
 
 // window.onclick = function(event) {
@@ -62,7 +56,7 @@ function selectCategory(category, id) {
 // }
 
 // $(function() {
-$('form#newTask').on('submit', function(e) {
+$(document).on('submit', '#newTask', function(e) {
 	// console.log("Hello")
 	var formInput = $("#newTask").serializeArray();
 	console.log(formInput);
@@ -142,7 +136,7 @@ $('form#newTask').on('submit', function(e) {
         // console.log(newTask.innerHTML)
 
 		
-        var divId = "category" + data.category
+        var divId = "category" + data["category"];
         var parentDiv =  document.getElementById(divId);
         console.log(parentDiv)
         var index = parentDiv.children.length-1;
@@ -162,7 +156,7 @@ $('form#newTask').on('submit', function(e) {
 });
 
 
-$('form#newList').on('submit', function(e) {
+$(document).on('submit', '#newList', function(e) {
 	// console.log("Hello")
 	var formInput = $("#newList").serializeArray()[0];
 	console.log(formInput);
@@ -192,11 +186,22 @@ $('form#newList').on('submit', function(e) {
         //add list content
         // var divId = "category" + data.category
         var newList = document.createElement("div");
-        newList.setAttribute("id", "category" + data['name']);
+        newList.setAttribute("id", "category" + data['id']);
         newList.className += "catDetails";
         newList.innerHTML =  "<h1>" + data['name'] + "</h1><br>";
         var parentDiv =  document.getElementById("listNames");
         parentDiv.appendChild(newList);
+
+        //add new list on dropdown
+        var taskCategorySelect = document.getElementById("taskCategory");
+        var newOption = document.createElement("option");
+        newOption.value = data["id"];
+        newOption.innerHTML = data["name"];
+        taskCategorySelect.appendChild(newOption);
+        var newTaskDropDown = document.getElementById("newTaskDropDown");
+        var newDropDownItem = document.createElement("li");
+        newDropDownItem.innerHTML = "<a class=\"dropDownItem\" id=\"newTaskC" + data["id"] + "\">" + data['name'] + "</a>";
+        newTaskDropDown.appendChild(newDropDownItem);
 
         openCategory(data['name']);
 
@@ -246,6 +251,18 @@ $(".taskList").on("click", ".dropDownItem", function(e) {
 		},
 	});
 	e.preventDefault();
+});
+
+$("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
+	var id = e.target.id.substring(8);
+	var selected = document.getElementById("selectedCategory");
+	selected.innerHTML = e.target.innerHTML;
+	var dropDown = document.getElementById("categoryDropDown");
+	var dropDownBox = document.getElementById("newDropDownBox");
+	dropDown.style.border = "none";
+	dropDownBox.style.display = "none";
+	console.log("id is " + id);
+	$('#taskCategory').val(id);
 });
 
 // #('.drop')

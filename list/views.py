@@ -35,7 +35,7 @@ def new_list(request):
 		raise Http404
 	new = Category(name=newName)
 	new.save()
-	return JsonResponse({"name": new.name})
+	return JsonResponse({"name": new.name, "id": new.pk})
 
 
 def delete_task(request, id):

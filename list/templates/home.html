@@ -33,9 +33,11 @@
 					<!-- <p> hellow</p> -->
 				</div>
 				<div class="dropDownBox" id="newDropDownBox"> 	
-					<ul class="dropDownList">
+					<ul class="dropDownList" id="newTaskDropDown">
 						{% for c in categories %}
-							<li> <a class="dropDownItem" onclick="selectCategory('{{ c.name }}', '{{ c.id }}')">{{ c.name }} </a></li>
+							{% with c.id|stringformat:"s" as cid %}
+							<li> <a class="dropDownItem" id="{{'newTaskC'|add:cid}}">{{ c.name }} </a></li>
+							{% endwith %}
 						{% endfor %}
 					</ul>
 				</div>
