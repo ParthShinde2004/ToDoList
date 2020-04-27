@@ -53,6 +53,14 @@ ul {
 	border-radius: 3px;
 }
 
+.side:hover {
+	background-color: rgba(109, 179, 201, 0.08);
+}
+
+.side.active:hover {
+	background-color: rgba(109, 179, 201, 0.2);
+}
+
 li.active {
 	background-color: rgba(109, 179, 201, 0.2);
 	/*background-color: #ffffff;*/
