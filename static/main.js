@@ -5,6 +5,7 @@
 // }
 
 function openCategory(category) {
+	console.log("OPEN-----------------------------")
 	var categoryTabs = document.getElementsByClassName("side"); // categoryTabs has one more element than categoryContent
 	var categoryContent = document.getElementById("categoryContent").getElementsByClassName("catDetails");
 	if (category === "All") { 
@@ -331,6 +332,11 @@ $("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
 $('#listTabs').on('click', 'a', function(e) {
 	console.log("side tabs clicked");
 	var category = e.target.parentElement.id.substring(3);
+	console.log("target is " + e.target.id);
+	console.log("category is " + category);
+	if (category === "") {
+		category = e.target.parentElement.parentElement.id.substring(3);
+	}
 	openCategory(category);
 });
 
