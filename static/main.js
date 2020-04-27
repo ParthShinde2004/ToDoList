@@ -113,8 +113,21 @@ $(document).on('submit', '#newTask', function(e) {
 
         //create new li
         var newLi = document.createElement("li");
-        newLi.innerHTML += "<a class=\"dropDownItem\">Delete</a>";
 
+        var newAnchor = document.createElement("a");
+        newAnchor.className += "dropDownItem settingDropDown";
+
+        var newImg = document.createElement("img");
+        newImg.src = "/static/trash.svg";
+        newImg.className += "trashIcon";
+
+        var newSpan = document.createElement("span");
+        newSpan.className += "delete";
+        newSpan.innerHTML = "Delete";
+
+        newAnchor.appendChild(newImg);
+        newAnchor.appendChild(newSpan);
+        newLi.appendChild(newAnchor);
 
         newDropDownList.appendChild(newLi);
 
@@ -185,7 +198,25 @@ $(document).on('submit', '#newList', function(e) {
 
         var newUl = document.createElement("ul");
         newUl.className += "dropDownList";
-        newUl.innerHTML = "<li><a class=\"dropDownItem\">Delete</a></li>"
+        // newUl.innerHTML = "<li><a class=\"dropDownItem\">Delete</a></li>"
+
+        var newLi = document.createElement("li");
+
+        var newAnchor1 = document.createElement("a");
+        newAnchor1.className += "dropDownItem settingDropDown";
+
+        var newImg = document.createElement("img");
+        newImg.src = "/static/trash.svg";
+        newImg.className += "trashIcon";
+
+        var newSpan = document.createElement("span");
+        newSpan.className += "delete";
+        newSpan.innerHTML = "Delete";
+
+        newAnchor1.appendChild(newImg);
+        newAnchor1.appendChild(newSpan);
+        newLi.appendChild(newAnchor1);
+        newUl.appendChild(newLi);
 
         var newDropDownBox = document.createElement("div");
         newDropDownBox.className += "dropDownBox listDropDown";
