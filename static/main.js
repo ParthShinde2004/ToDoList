@@ -1,5 +1,3 @@
-
-
 // window.onload = function () {
 
 // }
@@ -281,7 +279,7 @@ $('.taskList').on('click', ".ellipsis", function(e) {
 });
 
 $(".taskList").on("click", ".dropDownItem", function(e) {
-	var deleteId = e.target.parentElement.parentElement.parentElement.id.substring(6);
+	var deleteId = e.currentTarget.parentElement.parentElement.parentElement.id.substring(6);
 	// deleteData['csrfmiddlewaretoken'] = ctoken;
 	$.ajax({
 		method: "DELETE",
@@ -318,7 +316,7 @@ $('#listTabs').on('click', ".ellipsis", function(e) {
 
 
 $("#listTabs").on("click", ".dropDownItem", function(e) {
-	var deleteId = e.target.parentElement.parentElement.parentElement.id.substring(6);
+	var deleteId = e.currentTarget.parentElement.parentElement.parentElement.id.substring(6);
 	console.log("list delete id is " + deleteId);
 	// deleteData['csrfmiddlewaretoken'] = ctoken;
 	$.ajax({
@@ -359,12 +357,9 @@ $("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
 });
 
 
-
 $('#listTabs').on('click', 'a', function(e) {
 	console.log("side tabs clicked");
 	var category = e.target.parentElement.id.substring(3);
-	console.log("target is " + e.target.id);
-	console.log("category is " + category);
 	if (category === "") {
 		category = e.target.parentElement.parentElement.id.substring(3);
 	}
