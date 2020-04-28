@@ -37,7 +37,8 @@ $(document).on("click", "#tabNewCategory", function() {
 });
 
 // Hightlight category tab when it is clicked
-$(document).on("click", "#categoryDropDown", function() {	
+$(document).on("click", "#categoryDropDown", function() {
+	console.log("choosing category for new task");	
 	var dropDown = document.getElementById("categoryDropDown");
 	var dropDownBox = document.getElementById("newDropDownBox");
 
@@ -103,7 +104,7 @@ $(document).on('submit', '#newList', async function(e) {
 		// add new list on sidebar
 		$("#listTabs").load("/categorylist", function() {
 			$("#listNames").load("/tasklist", function() {
-				$('.textarea').load("/textarea", function() {
+				$('#newTask').load("/textarea", function() {
 					openCategory(data['id']);
 				});
 			});
@@ -188,7 +189,7 @@ $("#sidebar").on("click", ".dropDownItem", function(e) {
 			console.log(data["deleted"]);
 			$("#listTabs").load("/categorylist");
 			$("#listNames").load("/tasklist");
-			$('.textarea').load("/textarea");
+			$('#newTask').load("/textarea");
 		},
 		error: function(request) {
 			console.log(request.responseText);
@@ -198,8 +199,9 @@ $("#sidebar").on("click", ".dropDownItem", function(e) {
 });
 
 // Select category when the corresponding link is clicked
-$("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
+$("#newTask").on("click", ".dropDownItem", function(e) {
 	var id = e.target.id.substring(8);
+	console.log("ID is " + id);
 	var selected = document.getElementById("selectedCategory");
 	selected.innerHTML = e.target.innerHTML;
 	var dropDown = document.getElementById("categoryDropDown");
