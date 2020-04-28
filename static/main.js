@@ -2,10 +2,12 @@
 
 // }
 
+// Open category tab
 function openCategory(category) {
-	console.log("OPEN-----------------------------")
+	console.log("category is " + category);
 	var categoryTabs = document.getElementsByClassName("side"); // categoryTabs has one more element than categoryContent
 	var categoryContent = document.getElementById("categoryContent").getElementsByClassName("catDetails");
+
 	if (category === "All") { 
 		categoryTabs[0].classList.add("active");
 	} else {
@@ -28,13 +30,14 @@ function openCategory(category) {
 	}
 }
 
-
-function addCategory() {
+// Open up pop window for adding new category(list)
+$(document).on("click", "#tabNewCategory", function() {
 	var popup = document.getElementById("newCategory");
 	popup.style.display = "block";
-}
+});
 
-function showCategories() {
+// Hightlight category tab when it is clicked
+$(document).on("click", "#categoryDropDown", function() {	
 	var dropDown = document.getElementById("categoryDropDown");
 	var dropDownBox = document.getElementById("newDropDownBox");
 
@@ -45,13 +48,9 @@ function showCategories() {
 		dropDownBox.style.display = "block";
 		dropDown.style.border = "1px solid rgba(50, 152, 207, 0.4)";
 	}
-}
+});
 
-// window.onclick = function(event) {
-	// probably use class 
-// }
-
-// $(function() {
+// Create new task and display it
 $(document).on('submit', '#newTask', function(e) {
 	// console.log("Hello")
 	var formInput = $("#newTask").serializeArray();
@@ -68,86 +67,7 @@ $(document).on('submit', '#newTask', function(e) {
       data: postData,
       success: function(data) {
       	// reload task lists
-      	// $('#listNames').load("/tasklist");
-        var newTask = document.createElement("li");
-        newTask.className += "task";
-        newTask.id = "taskDiv" + data["id"]
-        var name = "check" + data["id"];
-        var imgId = "task" + data["id"];
-        var boxId = "ddtask" + data["id"];
-
-        // create <a class="taskLink>"
-        var newTaskLink = document.createElement('a');
-        newTaskLink.className += "taskLink"; 
-
-        //create <input type="checkbox">
-        var newCheckbox = document.createElement("input");
-        newCheckbox.type ="checkbox";
-        newCheckbox.id = name;
-        newCheckbox.name = name;
-
-        //create label
-        var newLabel = document.createElement("label");
-        newLabel.htmlFor = name;
-
-        //create title
-        var newTitle = document.createElement("span");
-        newTitle.innerHTML = " " + data["title"]
-
-        //create ellipsis
-        var newEllipsis = document.createElement("img");
-        newEllipsis.src ="/static/ellipsis.svg";
-        newEllipsis.className += "ellipsis";
-        newEllipsis.id = imgId;
-
-        //create dropdownbox
-        var newDropDownBox = document.createElement("div");
-        newDropDownBox.className += "dropDownBox taskDropDown";
-        newDropDownBox.id = boxId;
-
-        //create dropdownlist
-        var newDropDownList = document.createElement("ul");
-        newDropDownList.className += "dropDownList";
-
-        //create new li
-        var newLi = document.createElement("li");
-
-        var newAnchor = document.createElement("a");
-        newAnchor.className += "dropDownItem settingDropDown";
-
-        var newImg = document.createElement("img");
-        newImg.src = "/static/trash.svg";
-        newImg.className += "trashIcon";
-
-        var newSpan = document.createElement("span");
-        newSpan.className += "delete";
-        newSpan.innerHTML = "Delete";
-
-        newAnchor.appendChild(newImg);
-        newAnchor.appendChild(newSpan);
-        newLi.appendChild(newAnchor);
-
-        newDropDownList.appendChild(newLi);
-
-        newDropDownBox.appendChild(newDropDownList);
-
-        newTaskLink.appendChild(newCheckbox);
-        newTaskLink.appendChild(newLabel);
-        newTaskLink.appendChild(newTitle);
-        newTaskLink.appendChild(newEllipsis);
-
-        newTask.appendChild(newTaskLink);
-        newTask.appendChild(newDropDownBox);
-        console.log(newTask)
-
-		//<li><a class="dropDownItem">Delete</a></li>';
-        // console.log(newTask.innerHTML)
-		
-        var divId = "category" + data["category"];
-        var parentDiv =  document.getElementById(divId);
-        console.log(parentDiv)
-        var index = parentDiv.children.length-1;
-        parentDiv.insertBefore(newTask, parentDiv.children[index])
+      	$('#listNames').load("/tasklist");
 
         // clear form input after submitting
         var form = document.getElementById("newTask");
@@ -162,8 +82,8 @@ $(document).on('submit', '#newTask', function(e) {
     e.preventDefault();
 });
 
-
-$(document).on('submit', '#newList', function(e) {
+// Create new list and display it
+$(document).on('submit', '#newList', async function(e) {
 	// console.log("Hello")
 	var formInput = $("#newList").serializeArray()[0];
 	console.log(formInput);
@@ -181,78 +101,14 @@ $(document).on('submit', '#newList', function(e) {
 		popup.style.display = "none";
 
 		// add new list on sidebar
-		var newCategory = document.createElement("li");
-		newCategory.className += "side sideTabs"
-		var newId = "tab" + data['id'];
-		newCategory.id = newId;
-		var newAnchor = document.createElement("a");
-		newAnchor.className = "categoryLink";
-		newAnchor.innerHTML = data['name'];
-
-		var newEllipsis = document.createElement("img");
-		newEllipsis.src ="/static/ellipsis.svg";
-        newEllipsis.className = "ellipsis";
-        newEllipsis.id = 'eCat' + data['id'];
-
-        var newUl = document.createElement("ul");
-        newUl.className += "dropDownList";
-        // newUl.innerHTML = "<li><a class=\"dropDownItem\">Delete</a></li>"
-
-        var newLi = document.createElement("li");
-
-        var newAnchor1 = document.createElement("a");
-        newAnchor1.className += "dropDownItem settingDropDown";
-
-        var newImg = document.createElement("img");
-        newImg.src = "/static/trash.svg";
-        newImg.className += "trashIcon";
-
-        var newSpan = document.createElement("span");
-        newSpan.className += "delete";
-        newSpan.innerHTML = "Delete";
-
-        newAnchor1.appendChild(newImg);
-        newAnchor1.appendChild(newSpan);
-        newLi.appendChild(newAnchor1);
-        newUl.appendChild(newLi);
-
-        var newDropDownBox = document.createElement("div");
-        newDropDownBox.className += "dropDownBox listDropDown";
-        newDropDownBox.id = "ddeCat"+ data['id'];
-
-        newDropDownBox.appendChild(newUl);
-        newAnchor.appendChild(newEllipsis);
-
-        newCategory.appendChild(newAnchor);
-        newCategory.appendChild(newDropDownBox);
-
-		var parentDiv =  document.getElementById("listTabs");
-        var index = parentDiv.children.length-1;
-        parentDiv.insertBefore(newCategory, parentDiv.children[index])
-        
-
-        //add list content
-        // var divId = "category" + data.category
-        var newList = document.createElement("div");
-        newList.id  = "category" + data['id'];
-        newList.className += "catDetails";
-        newList.innerHTML =  "<h1>" + data['name'] + "</h1><br>";
-        var parentDiv =  document.getElementById("listNames");
-        parentDiv.appendChild(newList);
-
-        //add new list on dropdown
-        var taskCategorySelect = document.getElementById("taskCategory");
-        var newOption = document.createElement("option");
-        newOption.value = data["id"];
-        newOption.innerHTML = data["name"];
-        taskCategorySelect.appendChild(newOption);
-        var newTaskDropDown = document.getElementById("newTaskDropDown");
-        var newDropDownItem = document.createElement("li");
-        newDropDownItem.innerHTML = "<a class=\"dropDownItem\" id=\"newTaskC" + data["id"] + "\">" + data['name'] + "</a>";
-        newTaskDropDown.appendChild(newDropDownItem);
-
-        openCategory(data['id']);
-
+		$("#listTabs").load("/categorylist", function() {
+			$("#listNames").load("/tasklist", function() {
+				$('.textarea').load("/textarea", function() {
+					openCategory(data['id']);
+				});
+			});
+		});
+		
       }, 
       error: function(request) {
       	console.log(request.responseText);
@@ -261,11 +117,13 @@ $(document).on('submit', '#newList', function(e) {
     e.preventDefault();
 });
 
+// Close pop up window for adding new list
 $('.close').on('click',function(e) {
 	var popup = document.getElementById("newCategory");
 	popup.style.display = "none";
 });
 
+// Show or hide dropdown box of a task when the ellipsis icon is clicked
 $('.taskList').on('click', ".ellipsis", function(e) {
 	console.log("here")
 	var dropDown = document.getElementById('dd'+e.target.id);
@@ -278,6 +136,7 @@ $('.taskList').on('click', ".ellipsis", function(e) {
 	}
 });
 
+// Delete task when the delete button is clicked
 $(".taskList").on("click", ".dropDownItem", function(e) {
 	var deleteId = e.currentTarget.parentElement.parentElement.parentElement.id.substring(6);
 	// deleteData['csrfmiddlewaretoken'] = ctoken;
@@ -292,7 +151,6 @@ $(".taskList").on("click", ".dropDownItem", function(e) {
 			console.log(data["deleted"]);
 			var elem = document.getElementById("taskDiv" + deleteId);
 			elem.parentNode.removeChild(elem);
-			// $('#listNames').load("/tasklist");
 		},
 		error: function(request) {
 			console.log(request.responseText);
@@ -301,7 +159,7 @@ $(".taskList").on("click", ".dropDownItem", function(e) {
 	e.preventDefault();
 });
 
-
+// Show or hide dropdown box of a category tab when the ellipsis icon is clicked
 $('#listTabs').on('click', ".ellipsis", function(e) {
 	console.log("side ellipsis clicked")
 	var dropDown = document.getElementById('dd'+e.target.id);
@@ -314,8 +172,8 @@ $('#listTabs').on('click', ".ellipsis", function(e) {
 	}
 });
 
-
-$("#listTabs").on("click", ".dropDownItem", function(e) {
+// Delete category(list) when the delete button is clicked
+$("#sidebar").on("click", ".dropDownItem", function(e) {
 	var deleteId = e.currentTarget.parentElement.parentElement.parentElement.id.substring(6);
 	console.log("list delete id is " + deleteId);
 	// deleteData['csrfmiddlewaretoken'] = ctoken;
@@ -328,13 +186,9 @@ $("#listTabs").on("click", ".dropDownItem", function(e) {
 		},
 		success: function(data) {
 			console.log(data["deleted"]);
-			var elem = document.getElementById("category" + deleteId);
-			elem.parentNode.removeChild(elem);
-			elem = document.getElementById("tab" + deleteId);
-			elem.parentNode.removeChild(elem);
-			$("#taskCategory option[value=" + deleteId + "]").remove();
-			elem = document.getElementById("newTaskC" + deleteId);
-			elem.parentNode.parentNode.removeChild(elem.parentNode);
+			$("#listTabs").load("/categorylist");
+			$("#listNames").load("/tasklist");
+			$('.textarea').load("/textarea");
 		},
 		error: function(request) {
 			console.log(request.responseText);
@@ -343,7 +197,7 @@ $("#listTabs").on("click", ".dropDownItem", function(e) {
 	e.preventDefault();
 });
 
-
+// Select category when the corresponding link is clicked
 $("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
 	var id = e.target.id.substring(8);
 	var selected = document.getElementById("selectedCategory");
@@ -357,6 +211,7 @@ $("#newTaskDropDown").on("click", ".dropDownItem", function(e) {
 });
 
 
+// Show the content of a category tab when the tab is clicked
 $('#listTabs').on('click', 'a', function(e) {
 	console.log("side tabs clicked");
 	var category = e.target.parentElement.id.substring(3);
@@ -366,22 +221,5 @@ $('#listTabs').on('click', 'a', function(e) {
 	openCategory(category);
 });
 
-// #('.drop')
 
 
-
-
-
-// });
-
-// function submitTask() {
-// 	var newTask = $("#newTask").serialize();
-// 	console.log(newTask)
-// 	var elem = document.createElement("P")
-// 	elem.innerHTML = "adsfa";
-// 	document.getElementById("categoryContent").appendChild(elem);
-
-
-
-
-// }

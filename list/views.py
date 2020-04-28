@@ -55,6 +55,20 @@ def delete_list(request, id):
 		raise Http404
 	return JsonResponse({"deleted": True})
 
-# def task_list(request):
-# 	categories = Category.objects.all()
-# 	return render(request, "tasklist.html", {"categories":categories})
+def category_list(request):
+	categories = Category.objects.all()
+	return render(request, "categorylist.html", {"categories":categories})
+
+def task_list(request):
+	categories = Category.objects.all()
+	return render(request, "tasklist.html", {"categories":categories})
+
+def text_area(request):
+	categories = Category.objects.all()
+	return render(request, "textarea.html", {"categories":categories})
+
+
+
+
+
+

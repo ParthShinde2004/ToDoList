@@ -443,7 +443,13 @@ select {
 	color: inherit;
 }
 
-
+.listIcon {
+	height: 12px;
+	width: 12px;
+	padding-right: 10px;
+	/*float: left;*/
+	/*display: block;*/
+}
 
 
 

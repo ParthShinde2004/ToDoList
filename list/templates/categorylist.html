@@ -1,0 +1,31 @@
+{% load static %}
+<ul id="listTabs">
+	<li class="side active sideTabs" id="tabAll">
+		<a> <img src="{% static 'list.svg' %}" class="listIcon"> All </a>
+	</li>
+	{% for c in categories %}
+		{% with c.id|stringformat:"s" as cid %}
+		<li class="side sideTabs" id="{{'tab'|add:cid}}">
+			<a class="categoryLink"> 
+				<img src="{% static 'list.svg' %}" class="listIcon"> 
+				{{ c.name }}
+				<img src="{% static 'ellipsis.svg' %}" class="ellipsis" id="{{'eCat'|add:cid}}"> 
+			</a>
+			<div class="dropDownBox listDropDown" id="{{'ddeCat'|add:cid}}">
+				<ul class="dropDownList">
+					<li> 
+						<a class="dropDownItem settingDropDown">
+						<img src="{% static 'trash.svg' %}" class="trashIcon"><span class="delete">Delete</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</li>
+		{% endwith %}
+	{% endfor %}
+	<div class="side" id="tabNewCategory">
+		<a class="addListLink"> 
+			<img src="{% static 'plus.svg' %}" class="addIcon"><span id="addList">Add List</span>
+		</a>
+	</div>
+</ul>

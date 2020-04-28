@@ -5,11 +5,14 @@
 <div class="sidebar" id="sidebar">
 	<!-- <h2 id="labels"> Labels </h2> -->
 	<ul id="listTabs">
-		<li class="side active sideTabs" id="tabAll"><a> All </a></li>
+		<li class="side active sideTabs" id="tabAll">
+			<a> <img src="{% static 'list.svg' %}" class="listIcon"> All </a>
+		</li>
 		{% for c in categories %}
 			{% with c.id|stringformat:"s" as cid %}
 			<li class="side sideTabs" id="{{'tab'|add:cid}}">
 				<a class="categoryLink"> 
+					<img src="{% static 'list.svg' %}" class="listIcon"> 
 					{{ c.name }}
 					<img src="{% static 'ellipsis.svg' %}" class="ellipsis" id="{{'eCat'|add:cid}}"> 
 				</a>
@@ -25,7 +28,7 @@
 			</li>
 			{% endwith %}
 		{% endfor %}
-		<div class="side" id="tabNewCategory" onclick="addCategory()">
+		<div class="side" id="tabNewCategory">
 			<a class="addListLink"> 
 				<img src="{% static 'plus.svg' %}" class="addIcon"><span id="addList">Add List</span>
 			</a>
@@ -40,7 +43,7 @@
 				<!-- <div class="textInput"> -->
 				<!-- </div> -->
 				<div class="dropDown">
-					<a class="categoryDropDown" id="categoryDropDown" onclick="showCategories()">
+					<a class="categoryDropDown" id="categoryDropDown">
 						<span id="selectedCategory">List&nbsp;&nbsp;</span><span id="downIcon">&#9662;</span>
 					</a>
 					<select name="taskCategory" id="taskCategory">
@@ -58,8 +61,9 @@
 						{% endfor %}
 					</ul>
 				</div>
-			<div class="submitButton">
-				<input type="submit" value="Add Task">
+				<div class="submitButton">
+					<input type="submit" value="Add Task">
+				</div>
 			</div>
 		</form>
 	</div>

@@ -1,0 +1,26 @@
+{% load static %}
+<div class="textArea">
+	<input type="text" name="newTask" placeholder="New Task..." id="taskTextInput" autocomplete="off">
+	<div class="dropDown">
+		<a class="categoryDropDown" id="categoryDropDown" onclick="showCategories()">
+			<span id="selectedCategory">List&nbsp;&nbsp;</span><span id="downIcon">&#9662;</span>
+		</a>
+		<select name="taskCategory" id="taskCategory">
+			{% for c in categories %}
+				<option value="{{ c.id }}">{{ c.name }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div class="dropDownBox" id="newDropDownBox"> 	
+		<ul class="dropDownList" id="newTaskDropDown">
+			{% for c in categories %}
+				{% with c.id|stringformat:"s" as cid %}
+				<li> <a class="dropDownItem" id="{{'newTaskC'|add:cid}}">{{ c.name }} </a></li>
+				{% endwith %}
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="submitButton">
+		<input type="submit" value="Add Task">
+	</div>
+</div>
