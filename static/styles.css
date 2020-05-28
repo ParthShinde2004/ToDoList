@@ -223,7 +223,7 @@ label {
 }
 
 .task {
-	padding: 15px;
+	padding: 13px;
 	border-bottom: 1px solid #EDEDED;
 }
 
@@ -317,7 +317,7 @@ select {
 
 .taskDropDown {
 	margin-left: 478px;
-	margin-top: 12px;
+	margin-top: 0px;
 }
 
 
@@ -354,6 +354,10 @@ select {
 
 .categoryLink > .ellipsis {
 	margin-top: 0px;
+}
+
+.taskLink {
+	padding-bottom: 5px; 
 }
 
 .taskLink:hover {
@@ -451,26 +455,49 @@ select {
 	/*display: block;*/
 }
 
-
-
-
-
-/*.roundCheckbox {
-	width: 1.5em;
-    height: 1.5em;
-    background-color: white;
-    border-radius: 50%;
-    vertical-align: middle;
-    border: 1px solid #DDDDDD;
-    -webkit-appearance: none;
-    outline: none;
-    cursor: pointer;
+.checkBoxContainer input {
+	display: none;
 }
 
-.roundCheckbox:checked {
-	background: grey;
-}*/
+.checkBoxContainer {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+}
 
+.customCheckBox {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #EEEEEE;
+	border-radius: 10px;
+	margin: 5px 5px;
+	position: absolute;
+}
+
+.checkBoxContainer input:checked + .customCheckBox {
+	background-color: #6bb6c9;
+}
+
+.checkBoxContainer input:checked + .customCheckBox::after {
+	content: "";
+	height: 9px;
+	width: 4px;
+	border-right: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+	position: absolute;
+	transform: translate(120%, 30%) rotate(45deg);
+}
+
+.taskTitle {
+	display: inline-block;
+	margin-left: 45px;
+	margin-top: 6px;
+}
+
+.taskLink > .ellipsis {
+	margin-top: 7px;
+}
 
 
 

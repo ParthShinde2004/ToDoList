@@ -80,9 +80,11 @@
 						{% with t.id|stringformat:"s" as taskid %}
 						<li class="task" id="{{'taskDiv'|add:taskid}}">
 							<a class="taskLink"> 
+								<label for="{{'check'|add:taskid}}" class="checkBoxContainer">
 								<input type="checkbox" id="{{'check'|add:taskid}}" name="{{'check'|add:taskid}}">
-								<label for="{{'check'|add:taskid}}"></label>
-								<span>{{ t.title }}</span>
+								<span class="customCheckBox"> </span>
+								<span class="taskTitle">{{ t.title }}</span>
+								</label>
 								<img src="{% static 'ellipsis.svg' %}" class="ellipsis" id="{{'task'|add:taskid}}">
 							</a>
 							<div class="dropDownBox taskDropDown" id="{{'ddtask'|add:taskid}}">
