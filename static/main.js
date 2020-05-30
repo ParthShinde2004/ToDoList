@@ -30,6 +30,14 @@ function openCategory(category) {
 	}
 }
 
+
+function getCurrentCategory() {
+	categoryTabs = document.getElementsByClassName("side active"); // categoryTabs has one more element than categoryContent
+	category = "All";
+	category = categoryTabs[0].id
+	return category;
+}
+
 // Open up pop window for adding new category(list)
 $(document).on("click", "#tabNewCategory", function() {
 	var popup = document.getElementById("newCategory");
@@ -239,7 +247,11 @@ $('.taskList').on('change', 'input:checkbox', function(e) {
 		},
 		success: function(data) {
       		console.log("success");
-      		$('#listNames').load("/tasklist");
+      		currentTab = getCurrentCategory().substring(3);
+      		$('#listNames').load("/tasklist", function() {
+      			openCategory(currentTab);
+      		});
+      		
 
 		
 	    }, 
