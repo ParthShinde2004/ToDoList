@@ -98,7 +98,7 @@ h2#addList {
 	/*margin: -20px auto;*/
 	padding: 0px 15px;
 	width: 230px;
-	height: 650px;
+	height: 100%;
 	position: fixed;
 	overflow: auto;
 	/*top: 70px;*/
