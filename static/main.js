@@ -68,13 +68,14 @@ $(document).on('submit', '#newTask', function(e) {
       data: postData,
       success: function(data) {
       	// reload task lists
-      	$('#listNames').load("/tasklist");
-
-        // clear form input after submitting
-        var form = document.getElementById("newTask");
-        form.reset();
-        var selected = document.getElementById("selectedCategory");
-		selected.innerHTML = "List&nbsp;&nbsp;";
+      	$('#listNames').load("/tasklist", function() {
+      		// clear form input after submitting
+	        var form = document.getElementById("newTask");
+	        form.reset();
+	        var selected = document.getElementById("selectedCategory");
+			selected.innerHTML = "List&nbsp;&nbsp;";
+			openCategory(data["category"])
+      	});
       }, 
       error: function(request) {
       	console.log(request.responseText)
@@ -221,6 +222,31 @@ $('#listTabs').on('click', 'a', function(e) {
 		category = e.target.parentElement.parentElement.id.substring(3);
 	}
 	openCategory(category);
+});
+
+$('.taskList').on('change', 'input:checkbox', function(e) {
+
+	var taskId = e.target.id.substring(5);
+	var putData = {};
+	putData['taskId'] = taskId;
+	// putData['csrfmiddlewaretoken'] = ctoken;
+	$.ajax({
+		method: "PUT",
+		url: "check_task/" + taskId,
+		data: putData,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("X-CSRFToken", ctoken);
+		},
+		success: function(data) {
+      		console.log("success");
+      		$('#listNames').load("/tasklist");
+
+		
+	    }, 
+	    error: function(request) {
+	    	console.log(request.responseText);
+	    }
+    });
 });
 
 

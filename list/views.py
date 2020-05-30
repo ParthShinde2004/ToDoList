@@ -6,7 +6,10 @@ from .models import Task, Category
 # Create your views here.
 def home(request):
 	categories = Category.objects.all()
-	return render(request, "home.html", {"categories":categories})
+	data = {}
+	for c in categories:
+		data[c] = c.task_set.filter(done=False)
+	return render(request, "home.html", {"data": data})
 
 
 def new_task(request):
@@ -51,9 +54,22 @@ def delete_list(request, id):
 	try:
 		d = Category.objects.get(pk=id)
 		d.delete()
-	except Task.DoesNotExist:
+	except Category.DoesNotExist:
 		raise Http404
 	return JsonResponse({"deleted": True})
+
+
+def check_task(request, id):
+	try:
+		d = Task.objects.get(pk=id)
+		print(f"task status is {d.done}")
+		d.done = not d.done;
+		print(f"task status is now {d.done}")
+		d.save()
+	except Task.DoesNotExist:
+		raise Http404
+	return JsonResponse({"checked": True});
+
 
 def category_list(request):
 	categories = Category.objects.all()
@@ -61,11 +77,15 @@ def category_list(request):
 
 def task_list(request):
 	categories = Category.objects.all()
-	return render(request, "tasklist.html", {"categories":categories})
+	data = {}
+	for c in categories:
+		data[c] = c.task_set.filter(done=False)
+	return render(request, "tasklist.html", {"data": data})
 
 def text_area(request):
 	categories = Category.objects.all()
 	return render(request, "textarea.html", {"categories":categories})
+
 
 
 

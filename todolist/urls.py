@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^categorylist/$', views.category_list, name="categorylist"),
     url(r'^tasklist/$', views.task_list, name="tasklist"),
     url(r'^textarea/$', views.text_area, name="textarea"),
+    url(r'^check_task/(\d+)$', views.check_task, name="checktask"),
 ]

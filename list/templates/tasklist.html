@@ -1,11 +1,10 @@
 {% load static %}
-{% for c in categories %}
+{% for c, tasks in data.items %}
 	{% with c.id|stringformat:"s" as cid %}
 	<div id="{{'category'|add:cid}}" class="catDetails">  
 	{% endwith %}
 		<h1> {{ c.name }} </h1>
-		
-		{% for t in c.task_set.all %}
+		{% for t in tasks %}
 			{% with t.id|stringformat:"s" as taskid %}
 			<li class="task" id="{{'taskDiv'|add:taskid}}">
 				<a class="taskLink"> 
@@ -28,7 +27,6 @@
 			</li>
 			{% endwith %}
 		{% endfor %}
-		
 		<br>
 	</div>
 {% endfor %}

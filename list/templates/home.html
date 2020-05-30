@@ -8,7 +8,7 @@
 		<li class="side active sideTabs" id="tabAll">
 			<a> <img src="{% static 'list.svg' %}" class="listIcon"> All </a>
 		</li>
-		{% for c in categories %}
+		{% for c in data %}
 			{% with c.id|stringformat:"s" as cid %}
 			<li class="side sideTabs" id="{{'tab'|add:cid}}">
 				<a class="categoryLink"> 
@@ -47,14 +47,14 @@
 						<span id="selectedCategory">List&nbsp;&nbsp;</span><span id="downIcon">&#9662;</span>
 					</a>
 					<select name="taskCategory" id="taskCategory">
-						{% for c in categories %}
+						{% for c in data %}
 							<option value="{{ c.id }}">{{ c.name }}</option>
 						{% endfor %}
 					</select>
 				</div>
 				<div class="dropDownBox" id="newDropDownBox"> 	
 					<ul class="dropDownList" id="newTaskDropDown">
-						{% for c in categories %}
+						{% for c in data %}
 							{% with c.id|stringformat:"s" as cid %}
 							<li> <a class="dropDownItem" id="{{'newTaskC'|add:cid}}">{{ c.name }} </a></li>
 							{% endwith %}
@@ -70,13 +70,12 @@
 
 	<div class="taskList" id="categoryContent">
 		<ul id="listNames">
-			{% for c in categories %}
+			{% for c, tasks in data.items %}
 				{% with c.id|stringformat:"s" as cid %}
 				<div id="{{'category'|add:cid}}" class="catDetails">  
 				{% endwith %}
 					<h1> {{ c.name }} </h1>
-					
-					{% for t in c.task_set.all %}
+					{% for t in tasks %}
 						{% with t.id|stringformat:"s" as taskid %}
 						<li class="task" id="{{'taskDiv'|add:taskid}}">
 							<a class="taskLink"> 
@@ -99,7 +98,6 @@
 						</li>
 						{% endwith %}
 					{% endfor %}
-					
 					<br>
 				</div>
 			{% endfor %}
