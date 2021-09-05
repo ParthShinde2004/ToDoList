@@ -260,6 +260,3 @@ $('.taskList').on('change', 'input:checkbox', function(e) {
 	    }
     });
 });
-
-
-
